@@ -1,25 +1,17 @@
 import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 
-function App() {
+import { useState, useEffect } from "react";
+import "./styles.css";
+import INGREDIENTS from "./ingredients";
+import BurritoBuilder from "./BurritoBuilder";
+
+export default function App() {
+  const [allIngredients, setAllIngredients] = useState(INGREDIENTS);
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Test <code>src/App.js</code> and test to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BurritoBuilder allIngredients={allIngredients} />
     </div>
   );
 }
-
-export default App;
