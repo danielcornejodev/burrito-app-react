@@ -38,8 +38,7 @@ export default function BurritoBuilder({ allIngredients }) {
             width: "70%",
             height: "400px",
             padding: "80px 8px 60px 0",
-            boxSizing: "border-box",
-            display: { xs: "none", sm: "block" }
+            boxSizing: "border-box"
           }}
         >
           <Typography

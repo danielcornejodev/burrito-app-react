@@ -7,6 +7,7 @@ import {
   Card,
   OrderButton
 } from "./StyledComponents";
+import Toppings from "./Toppings";
 
 const ALT_STYLES = {
   border: "1px solid blue",
@@ -24,7 +25,7 @@ export default function Fillings({ allIngredients }) {
     const riceDisplayed = selectedRice.name;
     const toppingsDisplayed = selectedToppings.name;
 
-    alert(proteinDisplayed + ", " + riceDisplayed + ", " + toppingsDisplayed);
+    alert(`${proteinDisplayed} ${riceDisplayed}`);
   }
 
   return (
@@ -153,50 +154,7 @@ export default function Fillings({ allIngredients }) {
       >
         Toppings
       </Typography>
-      {allIngredients.toppings.map((topping, i) => (
-        <Card
-          key={i}
-          variant="outlined"
-          onClick={() => setSelectedToppings(topping)}
-          sx={topping === selectedToppings ? ALT_STYLES : {}}
-        >
-          <Typography
-            sx={{
-              fontWeight: "600",
-              color: PRIMARY_BROWN
-            }}
-            variant="h6"
-            gutterBottom={false}
-          >
-            {topping.name}
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "flex-start"
-            }}
-          >
-            <Typography
-              sx={{
-                fontWeight: "600",
-                color: PRIMARY_GREY
-              }}
-              variant="subtitle1"
-              gutterBottom={false}
-            ></Typography>
-            <Typography
-              sx={{
-                fontWeight: "600",
-                color: PRIMARY_GREY
-              }}
-              variant="subtitle1"
-              gutterBottom={false}
-            >
-              {topping.calories} CAL
-            </Typography>
-          </Box>
-        </Card>
-      ))}
+      <Toppings allIngredients={allIngredients} />
       <OrderButton
         onClick={OrderRecap}
         sx={{ marginTop: "20px" }}
