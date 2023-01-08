@@ -16,44 +16,42 @@ const ALT_STYLES = {
 };
 
 export default function Toppings({ allIngredients }) {
-  // const [selectedTopping, setSelectedTopping] = useState();
-  // const [selectedButton, setSelectedButton] = useState();
-  // const [selectedToppingsArray, setSelectedToppingsArray] = useState([]);
-  // const [buttonClicked, setButtonClicked] = useState(false);
   const [active, setActive] = useState([]);
-  let toppingNames = [];
+  const [activePrice, setActivePrice] = useState([]);
+
+  let toppingsArray = [];
+
+  console.log(active);
+  console.log(activePrice);
 
   for (let i = 0; i < allIngredients.toppings.length; i++) {
-    toppingNames.push(allIngredients.toppings[i].name);
+    toppingsArray.push(Object.values(allIngredients.toppings[i]));
   }
 
-  // function clickHandler(name, i) {
-  //   setSelectedTopping(name);
-  //   console.log(selectedTopping);
-  //   setSelectedButton(i);
-  //   console.log(selectedButton);
-  // }
-
-  // function setToClicked(i) {
-  //   if (selectedButton === i) {
-  //     setButtonClicked(true);
-  //     console.log(buttonClicked);
-  //   }
-  // }
-
-  return toppingNames.map((key) => {
-    const isActive = active.includes(key);
+  return toppingsArray.map((key) => {
+    const isActive = active.includes(key[0]);
+    const priceIsActive = activePrice.includes(key[1]);
 
     return (
       <Card
         key={key}
-        onClick={() =>
+        onClick={() => {
           setActive(
             isActive
-              ? active.filter((current) => current !== key)
-              : [...active, key]
-          )
-        }
+              ? active.filter(
+                  (activeArrayElement) => activeArrayElement !== key[0]
+                )
+              : [...active, key[0]]
+          );
+          setActivePrice(
+            priceIsActive
+              ? activePrice.filter(
+                  (activePriceArrayElement) =>
+                    activePriceArrayElement !== key[1]
+                )
+              : [...activePrice, key[1]]
+          );
+        }}
         sx={isActive ? ALT_STYLES : {}}
       >
         <Typography
@@ -64,83 +62,49 @@ export default function Toppings({ allIngredients }) {
           variant="h6"
           gutterBottom={false}
         >
-          {key}
+          {key[0]}
         </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-start"
+          }}
+        >
+          {key[1] !== 0 ? (
+            <Typography
+              sx={{
+                fontWeight: "600",
+                color: PRIMARY_GREY
+              }}
+              variant="subtitle1"
+              gutterBottom={false}
+            >
+              ${key[1].toFixed(2)}
+            </Typography>
+          ) : (
+            ""
+          )}
+          <Typography
+            sx={
+              key[1] !== 0
+                ? {
+                    fontWeight: "600",
+                    color: PRIMARY_GREY,
+                    paddingLeft: "40px"
+                  }
+                : {
+                    fontWeight: "600",
+                    color: PRIMARY_GREY,
+                    paddingLeft: "0px"
+                  }
+            }
+            variant="subtitle1"
+            gutterBottom={false}
+          >
+            {key[2]} CAL
+          </Typography>
+        </Box>
       </Card>
     );
   });
 }
-// return (
-//   <Box sx={{ height: "100vh" }}>
-//     <Typography
-//       sx={{
-//         fontWeight: "600",
-//         color: PRIMARY_BROWN,
-//         padding: "30px 0"
-//       }}
-//       variant="h5"
-//       gutterBottom={false}
-//     >
-//       Toppings
-//     </Typography>
-//     {toppingNames.map((name, i) => (
-//       <button
-//         key={key}
-//         onClick={() => {
-//           clickHandler(name, i);
-//           // setToClicked(i);
-//           ActiveButtons({ key });
-//         }}
-//         // style={buttonClicked ? { color: "green" } : {}}
-//       >
-//         {name}
-//       </button>
-//     ))}
-//     {allIngredients.toppings.map((topping, i) => (
-//       <Card
-//         key={i}
-//         variant="outlined"
-//         onClick={() => {
-//           setSelectedTopping({ topping });
-//         }}
-//         sx={topping === selectedTopping ? ALT_STYLES : {}}
-//       >
-//         <Typography
-//           sx={{
-//             fontWeight: "600",
-//             color: PRIMARY_BROWN
-//           }}
-//           variant="h6"
-//           gutterBottom={false}
-//         >
-//           {topping.name}
-//         </Typography>
-//         <Box
-//           sx={{
-//             display: "flex",
-//             justifyContent: "flex-start"
-//           }}
-//         >
-//           <Typography
-//             sx={{
-//               fontWeight: "600",
-//               color: PRIMARY_GREY
-//             }}
-//             variant="subtitle1"
-//             gutterBottom={false}
-//           ></Typography>
-//           <Typography
-//             sx={{
-//               fontWeight: "600",
-//               color: PRIMARY_GREY
-//             }}
-//             variant="subtitle1"
-//             gutterBottom={false}
-//           >
-//             {topping.calories} CAL
-//           </Typography>
-//         </Box>
-//       </Card>
-//     ))}
-//   </Box>
-// );
