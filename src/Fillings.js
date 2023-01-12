@@ -18,14 +18,18 @@ const ALT_STYLES = {
 export default function Fillings({ allIngredients }) {
   const [selectedProtein, setSelectedProtein] = useState();
   const [selectedRice, setSelectedRice] = useState();
-  const [selectedToppings, setSelectedToppings] = useState();
+  const [active, setActive] = useState([]);
+  const [activePrice, setActivePrice] = useState([]);
 
   function OrderRecap() {
     const proteinDisplayed = selectedProtein.name;
     const riceDisplayed = selectedRice.name;
-    const toppingsDisplayed = selectedToppings.name;
+    let initialVal = 0;
+    let grandTotal = `$${activePrice.reduce((accum, currentPrice) => accum + currentPrice, initialVal).toFixed(2)}`;
+    console.log(grandTotal);
 
-    alert(`${proteinDisplayed} ${riceDisplayed}`);
+
+    alert(`Your order: Burrito with ${proteinDisplayed}, ${riceDisplayed}, ${active}. Total ${grandTotal}`);
   }
 
   return (
@@ -154,7 +158,13 @@ export default function Fillings({ allIngredients }) {
       >
         Toppings
       </Typography>
-      <Toppings allIngredients={allIngredients} />
+      <Toppings 
+        allIngredients={allIngredients} 
+        active={active}
+        setActive={setActive}
+        activePrice={activePrice}
+        setActivePrice={setActivePrice}
+        />
       <OrderButton
         onClick={OrderRecap}
         sx={{ marginTop: "20px" }}

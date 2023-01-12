@@ -1,12 +1,9 @@
-import { AllOut } from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
 import {
   PRIMARY_BROWN,
   PRIMARY_GREY,
-  Card,
-  OrderButton
+  Card
 } from "./StyledComponents";
 
 const ALT_STYLES = {
@@ -15,14 +12,12 @@ const ALT_STYLES = {
   backgroundColor: "rgb(187, 222, 251, 0.1)"
 };
 
-export default function Toppings({ allIngredients }) {
-  const [active, setActive] = useState([]);
-  const [activePrice, setActivePrice] = useState([]);
+export default function Toppings({ allIngredients, active, setActive, activePrice, setActivePrice }) {
+
 
   let toppingsArray = [];
 
-  console.log(active);
-  console.log(activePrice);
+  
 
   for (let i = 0; i < allIngredients.toppings.length; i++) {
     toppingsArray.push(Object.values(allIngredients.toppings[i]));
