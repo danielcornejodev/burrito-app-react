@@ -26,7 +26,7 @@ export default function Toppings({ allIngredients, active, setActive, activePric
   return toppingsArray.map((key) => {
     const isActive = active.includes(key[0]);
     const priceIsActive = activePrice.includes(key[1]);
-
+    
     return (
       <Card
         key={key}
