@@ -22,14 +22,20 @@ export default function Fillings({ allIngredients }) {
   const [activePrice, setActivePrice] = useState([]);
 
   function OrderRecap() {
-    const proteinDisplayed = selectedProtein.name;
+    const proteinNameDisplayed = selectedProtein.name;
+    const selectedProteinPrice = selectedProtein.priceUSD;
+
     const riceDisplayed = selectedRice.name;
     let initialVal = 0;
-    let grandTotal = `$${activePrice.reduce((accum, currentPrice) => accum + currentPrice, initialVal).toFixed(2)}`;
-    console.log(grandTotal);
+    const toppingsPrice = Number(activePrice.reduce((accum, currentPrice) => accum + currentPrice, initialVal));
+    
+    function calculateGrandTotal() {
+      return selectedProteinPrice + toppingsPrice; 
+    }
+    console.log(selectedProteinPrice, toppingsPrice);
 
 
-    alert(`Your order: Burrito with ${proteinDisplayed}, ${riceDisplayed}, ${active}. Total ${grandTotal}`);
+    alert(`Your order: Burrito with ${proteinNameDisplayed}, ${riceDisplayed}, ${active}. Total $${calculateGrandTotal().toFixed(2)}`);
   }
 
   return (
@@ -49,7 +55,9 @@ export default function Fillings({ allIngredients }) {
         <Card
           key={i}
           variant="outlined"
-          onClick={() => setSelectedProtein(protein)}
+          onClick={() =>
+            setSelectedProtein(protein)
+          }
           sx={protein === selectedProtein ? ALT_STYLES : {}}
         >
           <Typography
