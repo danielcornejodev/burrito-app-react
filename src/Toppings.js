@@ -64,7 +64,7 @@ export default function Toppings({ allIngredients, active, setActive, activePric
             justifyContent: "flex-start"
           }}
         >
-          {key[2] !== 1 ? (
+          {key[2] !== 0 ? (
             <Typography
               sx={{
                 fontWeight: "600",
@@ -80,7 +80,7 @@ export default function Toppings({ allIngredients, active, setActive, activePric
           )}
           <Typography
             sx={
-              key[2] !== 1
+              key[2] !== 0
                 ? {
                     fontWeight: "600",
                     color: PRIMARY_GREY,
