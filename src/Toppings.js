@@ -12,20 +12,19 @@ const ALT_STYLES = {
   backgroundColor: "rgb(187, 222, 251, 0.1)"
 };
 
-export default function Toppings({ allIngredients, active, setActive, activePrice, setActivePrice }) {
-
+export default function Toppings({ allIngredients, active, setActive, activePrice, setActivePrice, toppingIngredients }) {
 
   let toppingsArray = [];
 
   
 
-  for (let i = 0; i < allIngredients.toppings.length; i++) {
-    toppingsArray.push(Object.values(allIngredients.toppings[i]));
+  for (let i = 0; i < toppingIngredients.length; i++) {
+    toppingsArray.push(Object.values(toppingIngredients[i]));
   }
 
   return toppingsArray.map((key) => {
-    const isActive = active.includes(key[0]);
-    const priceIsActive = activePrice.includes(key[1]);
+    const isActive = active.includes(key[1]);
+    const priceIsActive = activePrice.includes(key[2]);
     
     return (
       <Card
@@ -34,19 +33,19 @@ export default function Toppings({ allIngredients, active, setActive, activePric
           setActive(
             isActive
               ? active.filter(
-                  (activeArrayElement) => activeArrayElement !== key[0]
+                  (activeArrayElement) => activeArrayElement !== key[1]
                 )
-              : [...active, key[0]]
+              : [...active, key[1]]
           );
           setActivePrice(
             priceIsActive
               ? activePrice.filter(
                   (activePriceArrayElement) =>
-                    activePriceArrayElement !== key[1]
+                    activePriceArrayElement !== key[2]
                 )
-              : [...activePrice, key[1]]
+              : [...activePrice, key[2]]
           );
-        }}
+        }} 
         sx={isActive ? ALT_STYLES : {}}
       >
         <Typography
@@ -57,7 +56,7 @@ export default function Toppings({ allIngredients, active, setActive, activePric
           variant="h6"
           gutterBottom={false}
         >
-          {key[0]}
+          {key[1]}
         </Typography>
         <Box
           sx={{
@@ -65,7 +64,7 @@ export default function Toppings({ allIngredients, active, setActive, activePric
             justifyContent: "flex-start"
           }}
         >
-          {key[1] !== 0 ? (
+          {key[2] !== 1 ? (
             <Typography
               sx={{
                 fontWeight: "600",
@@ -74,14 +73,14 @@ export default function Toppings({ allIngredients, active, setActive, activePric
               variant="subtitle1"
               gutterBottom={false}
             >
-              ${key[1].toFixed(2)}
+              ${key[2].toFixed(2)}
             </Typography>
           ) : (
             ""
           )}
           <Typography
             sx={
-              key[1] !== 0
+              key[2] !== 1
                 ? {
                     fontWeight: "600",
                     color: PRIMARY_GREY,
@@ -96,7 +95,7 @@ export default function Toppings({ allIngredients, active, setActive, activePric
             variant="subtitle1"
             gutterBottom={false}
           >
-            {key[2]} CAL
+            {key[3]} CAL
           </Typography>
         </Box>
       </Card>

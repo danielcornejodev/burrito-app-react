@@ -15,7 +15,7 @@ const ALT_STYLES = {
   backgroundColor: "rgb(187, 222, 251, 0.1)"
 };
 
-export default function Fillings({ allIngredients }) {
+export default function Fillings({ allIngredients, proteinIngredients, riceIngredients, toppingIngredients }) {
   const [selectedProtein, setSelectedProtein] = useState();
   const [selectedRice, setSelectedRice] = useState();
   const [active, setActive] = useState([]);
@@ -32,11 +32,11 @@ export default function Fillings({ allIngredients }) {
     function calculateGrandTotal() {
       return selectedProteinPrice + toppingsPrice; 
     }
-    console.log(selectedProteinPrice, toppingsPrice);
-
 
     alert(`Your order: Burrito with ${proteinNameDisplayed}, ${riceDisplayed}, ${active}. Total $${calculateGrandTotal().toFixed(2)}`);
   }
+
+// console.log(riceIngredients);
 
   return (
     <Box sx={{ height: "100vh" }}>
@@ -51,7 +51,7 @@ export default function Fillings({ allIngredients }) {
       >
         PROTEIN
       </Typography>
-      {allIngredients.proteins.map((protein, i) => (
+      {proteinIngredients.map((protein, i) => (
         <Card
           key={i}
           variant="outlined"
@@ -111,7 +111,7 @@ export default function Fillings({ allIngredients }) {
       >
         Rice
       </Typography>
-      {allIngredients.rice.map((rice, i) => (
+      {riceIngredients.map((rice, i) => (
         <Card
           key={i}
           variant="outlined"
@@ -168,6 +168,7 @@ export default function Fillings({ allIngredients }) {
       </Typography>
       <Toppings 
         allIngredients={allIngredients} 
+        toppingIngredients={toppingIngredients}
         active={active}
         setActive={setActive}
         activePrice={activePrice}

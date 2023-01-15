@@ -1,16 +1,19 @@
 {
   "proteins": [
     {
+      "id": 1,
       "name": "Chicken",
       "priceUSD": 8.2,
       "calories": 180
     },
     {
+      "id": 2,
       "name": "Steak",
       "priceUSD": 11.7,
       "calories": 250
     },
     {
+      "id": 3,
       "name": "Tofu",
       "priceUSD": 8.2,
       "calories": 150
@@ -18,16 +21,19 @@
   ],
   "rice": [
     {
+      "id": 1,
       "name": "White Rice",
       "priceUSD": 0,
       "calories": 210
     },
     {
+      "id": 2,
       "name": "Brown Rice",
       "priceUSD": 0,
       "calories": 210
     },
     {
+      "id": 3,
       "name": "No Rice",
       "priceUSD": 0,
       "calories": 0
@@ -35,16 +41,19 @@
   ],
   "beans": [
     {
+      "id": 1,
       "name": "Black Beans",
       "priceUSD": 0,
       "calories": 130
     },
     {
+      "id": 2,
       "name": "Pinto Beans",
       "priceUSD": 0,
       "calories": 130
     },
     {
+      "id": 3,
       "name": "No Beans",
       "priceUSD": 0,
       "calories": 0
@@ -52,26 +61,31 @@
   ],
   "toppings": [
     {
+      "id": 1,
       "name": "Guacamole",
       "priceUSD": 2.6,
       "calories": 230
     },
     {
+      "id": 2,
       "name": "Fresh Tomato Salsa",
       "priceUSD": 0,
       "calories": 25
     },
     {
+      "id": 3,
       "name": "Sour Cream",
       "priceUSD": 0,
       "calories": 110
     },
     {
+      "id": 4,
       "name": "Cheese",
       "priceUSD": 0,
       "calories": 110
     },
     {
+      "id": 5,
       "name": "No Toppings",
       "priceUSD": 0,
       "calories": 0

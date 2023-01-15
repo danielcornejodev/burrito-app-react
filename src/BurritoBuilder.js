@@ -9,7 +9,7 @@ import { Hiding } from "./MediaQuery";
 const burritoURL =
   "https://www.chipotle.com/content/dam/chipotle/global/menu/meal-types/cmg-10001-burrito/web-desktop/order.png";
 
-export default function BurritoBuilder({ allIngredients }) {
+export default function BurritoBuilder({ allIngredients, proteinIngredients, riceIngredients, toppingIngredients }) {
   return (
     <MainBody>
       <Box
@@ -76,7 +76,12 @@ export default function BurritoBuilder({ allIngredients }) {
           boxSizing: "border-box"
         }}
       >
-        <Fillings allIngredients={allIngredients} />
+        <Fillings 
+          allIngredients={allIngredients}
+          proteinIngredients={proteinIngredients} 
+          riceIngredients={riceIngredients}
+          toppingIngredients={toppingIngredients}
+           />
       </Box>
     </MainBody>
   );
