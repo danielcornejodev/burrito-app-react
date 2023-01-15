@@ -36,7 +36,19 @@ export default function Fillings({ allIngredients, proteinIngredients, riceIngre
     alert(`Your order: Burrito with ${proteinNameDisplayed}, ${riceDisplayed}, ${active}. Total $${calculateGrandTotal().toFixed(2)}`);
   }
 
-// console.log(riceIngredients);
+
+  // const submitOrder = (e) => {
+  //   e.preventDefault();
+  
+  //   fetch('http://localhost:3000/proteins', {
+  //     method: 'PUT',
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(selectedProtein)
+  //   }).then(() => {
+  //     console.log('Order Placed');
+  //   })
+  // }
+  
 
   return (
     <Box sx={{ height: "100vh" }}>
@@ -186,6 +198,7 @@ export default function Fillings({ allIngredients, proteinIngredients, riceIngre
           }}
           variant="h6"
           gutterBottom={false}
+          // onClick={submitOrder}
         >
           Place Order
         </Typography>
