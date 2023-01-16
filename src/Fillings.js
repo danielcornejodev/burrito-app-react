@@ -15,11 +15,12 @@ const ALT_STYLES = {
   backgroundColor: "rgb(187, 222, 251, 0.1)"
 };
 
-export default function Fillings({ allIngredients, proteinIngredients, riceIngredients, toppingIngredients }) {
-  const [selectedProtein, setSelectedProtein] = useState();
-  const [selectedRice, setSelectedRice] = useState();
+export default function Fillings({ allIngredients, proteinIngredients, riceIngredients, toppingIngredients, setOrderSubmitted, setNewOrder }) {
+  const [selectedProtein, setSelectedProtein] = useState([]);
+  const [selectedRice, setSelectedRice] = useState([]);
   const [active, setActive] = useState([]);
   const [activePrice, setActivePrice] = useState([]);
+
 
   function OrderRecap() {
     const proteinNameDisplayed = selectedProtein.name;
@@ -37,18 +38,27 @@ export default function Fillings({ allIngredients, proteinIngredients, riceIngre
   }
 
 
-  // const submitOrder = (e) => {
-  //   e.preventDefault();
+  const submitOrder = (e) => {
+    console.log(selectedProtein);
+    // fetch('http://localhost:3000/proteins', {
+    //   method: 'POST',
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify([
+    //     {
+    //     "id": 1,
+    //     "name": "Chicken",
+    //     "priceUSD": 8.2,
+    //     "calories": 180
+    //     }
+    //     ])
+    // })
+  }
   
-  //   fetch('http://localhost:3000/proteins', {
-  //     method: 'PUT',
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(selectedProtein)
-  //   }).then(() => {
-  //     console.log('Order Placed');
-  //   })
-  // }
-  
+  let USDollar = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+});
+
 
   return (
     <Box sx={{ height: "100vh" }}>
@@ -96,7 +106,7 @@ export default function Fillings({ allIngredients, proteinIngredients, riceIngre
               variant="subtitle1"
               gutterBottom={false}
             >
-              ${protein.priceUSD.toFixed(2)}
+              {USDollar.format(protein.priceUSD)}
             </Typography>
             <Typography
               sx={{
@@ -187,7 +197,12 @@ export default function Fillings({ allIngredients, proteinIngredients, riceIngre
         setActivePrice={setActivePrice}
         />
       <OrderButton
-        onClick={OrderRecap}
+        onClick={() => {
+          OrderRecap();
+          setOrderSubmitted(true);
+          submitOrder();
+          setNewOrder(false);
+        }}
         sx={{ marginTop: "20px" }}
         variant="outlined"
       >
@@ -198,7 +213,6 @@ export default function Fillings({ allIngredients, proteinIngredients, riceIngre
           }}
           variant="h6"
           gutterBottom={false}
-          // onClick={submitOrder}
         >
           Place Order
         </Typography>

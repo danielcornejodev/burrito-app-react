@@ -3,13 +3,17 @@ import "./styles.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import INGREDIENTS from "./ingredients";
 import BurritoBuilder from "./BurritoBuilder";
+import OrderRecap from "./OrderRecap";
 
 export default function App() {
+  const navigate = useNavigate();
   const [allIngredients, setAllIngredients] = useState(INGREDIENTS);
   const [proteinIngredients, setProteinIngredients] = useState([]);
   const [riceIngredients, setRiceIngredients] = useState([]);
   const [beanIngredients, setBeanIngredients] = useState([]);
   const [toppingIngredients, setToppingIngredients] = useState([]);
+  const [orderSubmitted, setOrderSubmitted] = useState(false);
+  const [newOrder, setNewOrder] = useState(false);
  
   useEffect(() => {
     Promise.all([
@@ -29,6 +33,18 @@ export default function App() {
       })
   }, [])
 
+  useEffect(() => {
+    if (orderSubmitted) {
+      navigate("/orderplaced");
+    }
+  }, [orderSubmitted]);
+
+  useEffect(() => {
+    if (newOrder) {
+      navigate("/");
+    }
+  }, [newOrder]);
+
 
   return (
     <div className="App">
@@ -40,7 +56,16 @@ export default function App() {
             allIngredients={allIngredients}
             riceIngredients={riceIngredients}
             toppingIngredients={toppingIngredients}
+            setOrderSubmitted={setOrderSubmitted}
+            setNewOrder={setNewOrder}
              />}
+        />
+        <Route
+          path="/orderplaced"
+          element={<OrderRecap 
+            setNewOrder={setNewOrder}
+            setOrderSubmitted={setOrderSubmitted}
+          />}
         />
       </Routes>
     </div>
