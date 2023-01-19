@@ -39,19 +39,11 @@ export default function Fillings({ allIngredients, proteinIngredients, riceIngre
 
 
   const submitOrder = (e) => {
-    console.log(selectedProtein);
-    // fetch('http://localhost:3000/proteins', {
-    //   method: 'POST',
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify([
-    //     {
-    //     "id": 1,
-    //     "name": "Chicken",
-    //     "priceUSD": 8.2,
-    //     "calories": 180
-    //     }
-    //     ])
-    // })
+    fetch('http://localhost:3000/order', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(selectedProtein)
+    })
   }
   
   let USDollar = new Intl.NumberFormat('en-US', {
